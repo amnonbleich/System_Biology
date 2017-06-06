@@ -1,0 +1,6 @@
+* https://www.researchgate.net/publication/11199001_Targeting_death_and_decoy_receptors_of_the_tumour-necrosis_factor_superfamily - articel with overview
+* https://www.youtube.com/watch?v=-vmtK-bAC5E - overview video
+* https://www.youtube.com/watch?v=SyvOPXeg4ig - another overview video (with references in the end)
+* http://www.kegg.jp/kegg-bin/highlight_pathway?scale=1.0&map=map04210&keyword=apoptosis - big model
+* http://www.kegg.jp/kegg-bin/highlight_pathway?scale=1.0&map=map04215&keyword=apoptosis - small model
+* http://www.kegg.jp/kegg-bin/search_pathway_text?map=map&keyword=apoptosis&mode=1&viewImage=true - different apoptosis models
