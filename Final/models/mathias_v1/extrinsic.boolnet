@@ -1,0 +1,6 @@
+targets, factors
+TNFR, TNFR
+FADD, TNFR
+Casp8, FADD
+Casp7, Casp8
+Apoptosis, Casp7

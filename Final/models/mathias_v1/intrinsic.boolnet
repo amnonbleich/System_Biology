@@ -1,0 +1,14 @@
+targets, factors
+FAS_ligand, FAS_ligand
+FAS_receptor, FAS_receptor
+stimulus, FAS_ligand & FAS_receptor
+BH3, stimulus
+BCL2, ! BH3
+BAX, ! BCL2
+BAK, ! BCL2
+CytC, BAX & BAK
+Apaf1, CytC
+Casp9, Apaf1
+Casp3, Casp9
+Apoptosis, Casp3
+
