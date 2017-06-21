@@ -1,0 +1,4 @@
+- dominance of input
+  - attractors for different inputs configs
+- pos feedback casp3
+- probab. feed forward loops

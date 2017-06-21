@@ -4,9 +4,12 @@ setwd("~/System_Biology/Final/models/mathias_v1")
 extrinsic <- loadNetwork("extrinsic.boolnet")
 intrinsic <- loadNetwork("intrinsic.boolnet")
 
+plotNetworkWiring(extrinsic)
+plotNetworkWiring(intrinsic)
+
 start_state_ex = c(1,0,0,0,0)
-start_state_in = c(1,1,0,0,1,1,1,0,0,0,0,0)
-start_state_in = c(1,1,0,0,1,0,0,0,0,0,0,0)
+# start_state_in = c(1,1,0,0,1,1,1,0,0,0,0,0)
+start_state_in = c(1,0,0,1,0,0,0,0,0,0,0)
 
 plotSequence(extrinsic, startState = start_state_ex)
 plotSequence(intrinsic, startState = start_state_in)
