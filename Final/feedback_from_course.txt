@@ -2,3 +2,5 @@
   - attractors for different inputs configs
 - pos feedback casp3
 - probab. feed forward loops
+- read second paper form heike for more detailed caspase regulation information
+- probabilistic might be good idea
