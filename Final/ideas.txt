@@ -1,0 +1,2 @@
+Positive feedback Casp3->Casp9 Vs. no positive feedback
+IAF inhibition on Casp3 Vs on Casp3 & Casp9 (should result in bistabillity, envolves ODE models)
