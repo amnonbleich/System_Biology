@@ -5,9 +5,10 @@ BH3, stimulus
 BCL2, ! BH3
 BAX, ! BCL2
 BAK, ! BCL2
-CytC, BAX & BAK
+CytC, !BAX & !BAK
 Apaf1, CytC
 Casp9, Apaf1
+IAP, IAP
 Casp3, Casp9 | Casp3
 Apoptosis, Casp3
 
