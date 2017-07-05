@@ -1,14 +1,13 @@
 targets, factors
-p53, p53
-stimulus, p53
+stimulus, stimulus
 BH3, stimulus
 BCL2, ! BH3
 BAX, ! BCL2
 BAK, ! BCL2
-CytC, !BAX & !BAK
+CytC, BAX & BAK
 Apaf1, CytC
-Casp9, Apaf1 | Casp3
-IAP, IAP
+Casp9, Apaf1 | Casp3 & !IAP
+SMAC, BAK & BAX
+IAP, !SMAC
 Casp3, Casp9 & !IAP
 Apoptosis, Casp3
-
