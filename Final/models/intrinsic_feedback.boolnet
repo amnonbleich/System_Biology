@@ -6,7 +6,7 @@ BAX, ! BCL2
 BAK, ! BCL2
 CytC, BAX & BAK
 Apaf1, CytC
-Casp9, Apaf1 | Casp3 & !IAP
+Casp9, (Apaf1 | Casp3) & !IAP
 SMAC, BAK & BAX
 IAP, !SMAC
 Casp3, Casp9 & !IAP
