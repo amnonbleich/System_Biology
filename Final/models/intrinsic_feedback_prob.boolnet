@@ -1,0 +1,25 @@
+targets, factors, probabilities
+stimulus, stimulus, 0.2
+BH3, stimulus, 0.2
+BCL2, ! BH3, 0.2
+BAX, ! BCL2, 0.2
+BAK, ! BCL2, 0.2
+CytC, BAX & BAK, 0.2
+Apaf1, CytC, 0.2
+Casp9, (Apaf1 | Casp3) & !IAP, 0.2
+SMAC, BAK & BAX, 0.2
+IAP, !SMAC, 0.2
+Casp3, Casp9 & !IAP, 0.2
+Apoptosis, Casp3, 0.2
+stimulus, 0, 0.8
+BH3, 0, 0.8
+BCL2, 0, 0.8
+BAX, 0, 0.8
+BAK, 0, 0.8
+CytC, 0, 0.8
+Apaf1, 0, 0.8
+Casp9, 0, 0.8
+SMAC, 0, 0.8
+IAP, 0, 0.8
+Casp3, 0, 0.8
+Apoptosis, 0, 0.8
