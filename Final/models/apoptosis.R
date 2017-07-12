@@ -1,6 +1,6 @@
 library(BoolNet)
-# setwd("~/System_Biology/Final/models/")
-setwd("~/Workspace/uni/System_Biology/Final/models/")
+setwd("~/System_Biology/Final/models/")
+# setwd("~/Workspace/uni/System_Biology/Final/models/")
 
 extrinsic <- loadNetwork("extrinsic.boolnet")
 intrinsic <- loadNetwork("intrinsic.boolnet")
@@ -15,7 +15,7 @@ start_state_in = c(1,0,1,0,0,0,0,0,0,1,0,0)
 ## attractors wt
 par(mfrow=c(1,1))
 start_state_in = c(1,0,1,0,0,0,0,0,0,1,0,0)
-att = getAttractors(intrinsic, method="exhaustive", startStates = list(middle_start_state_in), returnTable=T)
+att = getAttractors(intrinsic, method="exhaustive", returnTable=T)
 plotAttractors(att, drawLegend=F)
 
 ## trajectory wt
@@ -23,6 +23,14 @@ par(mfrow=c(1,2))
 # plotSequence(extrinsic, startState = start_state_ex)
 plotSequence(intrinsic, startState = start_state_in, title = "no_feedback", drawLegend=F)
 plotSequence(intrinsic_feedback, startState = start_state_in, title = "Casp3->Casp9 feedback", drawLegend=F)
+
+## get attractor sequence, defined start state
+start_state_in = c(1,0,1,0,0,0,0,0,0,1,0,0)
+att <- getAttractors(network=intrinsic_feedback, type="asynchronous", method="chosen", startStates=list(start_state_in))
+
+intrinsic_feedback_prob <- loadNetwork("intrinsic_feedback_prob.boolnet")
+source("average_n_attractor_paths.R")
+average_n_attractor_paths(network = intrinsic_feedback_prob, number_of_runs = 1000, start_state = start_state_in)
 
 ##Stimulus stops - no lock effect
 middle_start_state_in = c(0,1,0,1,1,1,1,1,1,0,1,1)
