@@ -34,6 +34,7 @@ average_n_attractor_paths(network = intrinsic_feedback_prob, number_of_runs = 10
 
 ##Stimulus stops - no lock effect
 middle_start_state_in = c(0,1,0,1,1,1,1,1,1,0,1,1)
+par(mfrow=c(1,2))
 par(mfrow=c(2,2))
 plotSequence(intrinsic, startState = middle_start_state_in ,title = "no_feedback", drawLegend=F)
 plotSequence(intrinsic_feedback, startState = middle_start_state_in, title = "Casp3->Casp9 feedback", drawLegend=F)
