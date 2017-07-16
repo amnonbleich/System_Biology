@@ -28,9 +28,9 @@ plotSequence(intrinsic_feedback, startState = start_state_in, title = "Casp3->Ca
 start_state_in = c(1,0,1,0,0,0,0,0,0,1,0,0)
 att <- getAttractors(network=intrinsic_feedback, type="asynchronous", method="chosen", startStates=list(start_state_in))
 
-intrinsic_feedback_prob <- loadNetwork("intrinsic_feedback_prob.boolnet")
-source("average_n_attractor_paths.R")
-average_n_attractor_paths(network = intrinsic_feedback_prob, number_of_runs = 1000, start_state = start_state_in)
+# intrinsic_feedback_prob <- loadNetwork("intrinsic_feedback_prob.boolnet")
+# source("average_n_attractor_paths.R")
+# average_n_attractor_paths(network = intrinsic_feedback, number_of_runs = 1000, start_state = start_state_in)
 
 ##Stimulus stops - no lock effect
 middle_start_state_in = c(0,1,0,1,1,1,1,1,1,0,1,1)
@@ -86,10 +86,17 @@ attractors_lock_01=getAttractors(intrinsic_feedback, type="asynchronous", method
 attractors_lock_10=getAttractors(intrinsic_feedback, type="asynchronous", method="chosen", startStates = list(start_state_10), genesON=c("BCL2"), genesOFF = c("IAP"), returnTable=T)
 attractors_lock_11=getAttractors(intrinsic_feedback, type="asynchronous", method="chosen", startStates = list(start_state_11), genesON=c("BCL2", "IAP"), returnTable=T)
 
-plotAttractors(attractors_lock_00, drawLegend=F, title = "00")
-plotAttractors(attractors_lock_01, drawLegend=F, title = "01")
-plotAttractors(attractors_lock_10, drawLegend=F, title = "10")
-plotAttractors(attractors_lock_11, drawLegend=F, title = "11")
+# old:
+# plotAttractors(attractors_lock_00, drawLegend=F, title = "00")
+# plotAttractors(attractors_lock_01, drawLegend=F, title = "01")
+# plotAttractors(attractors_lock_10, drawLegend=F, title = "10")
+# plotAttractors(attractors_lock_11, drawLegend=F, title = "11")
+
+# new, alternative
+source("plot_attractor_path.R")
+genes_to_plot = c("BCL2", "Apaf1", "IAP", "Apoptosis") # optional
+cols=c("green", "orange", "blue", "red") #optional
+plot_attractor_path(network=intrinsic_feedback, startStates = start_state_00, genes = genes_to_plot)
 
 ######### BCL2-IAP 00 01 10 11 stimulus stops ######### 
 middle_start_state_00 = c(0,1,0,1,1,1,1,1,1,0,1,1)
