@@ -87,16 +87,21 @@ attractors_lock_10=getAttractors(intrinsic_feedback, type="asynchronous", method
 attractors_lock_11=getAttractors(intrinsic_feedback, type="asynchronous", method="chosen", startStates = list(start_state_11), genesON=c("BCL2", "IAP"), returnTable=T)
 
 # old:
-# plotAttractors(attractors_lock_00, drawLegend=F, title = "00")
-# plotAttractors(attractors_lock_01, drawLegend=F, title = "01")
-# plotAttractors(attractors_lock_10, drawLegend=F, title = "10")
-# plotAttractors(attractors_lock_11, drawLegend=F, title = "11")
+plotAttractors(attractors_lock_00, drawLegend=F, title = "00")
+plotAttractors(attractors_lock_01, drawLegend=F, title = "01")
+plotAttractors(attractors_lock_10, drawLegend=F, title = "10")
+plotAttractors(attractors_lock_11, drawLegend=F, title = "11")
 
 # new, alternative
 source("plot_attractor_path.R")
 genes_to_plot = c("BCL2", "Apaf1", "IAP", "Apoptosis") # optional
 cols=c("green", "orange", "blue", "red") #optional
-plot_attractor_path(network=intrinsic_feedback, startStates = start_state_00, genes = genes_to_plot)
+
+# does not work to well with par(mfrow)
+plot_attractor_path(network=intrinsic_feedback, startStates = start_state_00, genes = genes_to_plot, colors = cols)
+plot_attractor_path(network=intrinsic_feedback, startStates = start_state_01, genes = genes_to_plot, colors = cols)
+plot_attractor_path(network=intrinsic_feedback, startStates = start_state_10, genes = genes_to_plot, colors = cols)
+plot_attractor_path(network=intrinsic_feedback, startStates = start_state_11, genes = genes_to_plot, colors = cols)
 
 ######### BCL2-IAP 00 01 10 11 stimulus stops ######### 
 middle_start_state_00 = c(0,1,0,1,1,1,1,1,1,0,1,1)
