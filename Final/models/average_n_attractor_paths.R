@@ -84,12 +84,11 @@ average_n_attractor_paths <- function(network, number_of_runs, start_state){
 
 ## Examples: 
 ## asynchronous
-library(BoolNet)
-setwd("~/System_Biology/Final/models")
-intrinsic_feedback <- loadNetwork("intrinsic_feedback.boolnet")
-start_state_in = c(1,0,1,0,0,0,0,0,0,1,0,0)
-n_runs_matrix_5 <- average_n_attractor_paths(network = intrinsic_feedback, number_of_runs = 4000,
-                                           start_state = start_state_in)
-write.csv(n_runs_matrix, "4000_runs_intrinsic_feedback.csv")
+# library(BoolNet)
+# setwd("~/System_Biology/Final/models")
+# intrinsic_feedback <- loadNetwork("intrinsic_feedback.boolnet")
+# start_state_in = c(1,0,1,0,0,0,0,0,0,1,0,0)
+# n_runs_matrix_5 <- average_n_attractor_paths(network = intrinsic_feedback, number_of_runs = 4000,
+#                                            start_state = start_state_in)
+# write.csv(n_runs_matrix, "4000_runs_intrinsic_feedback.csv")
 
-## dev stuff

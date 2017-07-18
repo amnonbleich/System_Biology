@@ -36,8 +36,21 @@ att <- getAttractors(network=intrinsic_feedback, type="asynchronous", method="ch
 middle_start_state_in = c(0,1,0,1,1,1,1,1,1,0,1,1)
 par(mfrow=c(1,2))
 par(mfrow=c(2,2))
-plotSequence(intrinsic, startState = middle_start_state_in ,title = "no_feedback", drawLegend=F)
+
+# original:
+plotSequence(intrinsic, startState = middle_start_state_in ,title = "no_feedback", drawLegend=F) 
 plotSequence(intrinsic_feedback, startState = middle_start_state_in, title = "Casp3->Casp9 feedback", drawLegend=F)
+
+# new, alternative:
+genes_to_plot = c("stimulus","BCL2", "IAP","Casp9", "Apoptosis") # optional
+cols=c("green", "orange", "blue", "red", "darkred") #optional
+par(mfrow=c(1,2))
+source("plot_attractor_path.R")
+plot_attractor_path(intrinsic, title = "no_feedback", startStates = start_state_in, 
+                    second_round_states = middle_start_state_in, genes = genes_to_plot, colors = cols, save_png = T)
+plot_attractor_path(intrinsic_feedback, title = "Casp3->Casp9 feedback", startStates = start_state_in, 
+                    second_round_states = middle_start_state_in, genes = genes_to_plot, colors = cols, draw_legend = F, save_png = T )
+
 attractors=getAttractors(intrinsic, type="asynchronous", method="chosen", startStates = list(middle_start_state_in), returnTable=T)
 attractors_lock=getAttractors(intrinsic_feedback, type="asynchronous", method="chosen", startStates = list(middle_start_state_in), returnTable=T)
 plotAttractors(attractors, drawLegend=F, title = "Asynchronous, no lock")
@@ -80,22 +93,18 @@ start_state_01 = c(1,0,0,0,0,0,0,0,0,1,0,0)
 start_state_10 = c(1,0,1,0,0,0,0,0,0,0,0,0)
 start_state_11 = c(1,0,1,0,0,0,0,0,0,1,0,0)
 
-par(mfrow=c(2,2))
 attractors_lock_00=getAttractors(intrinsic_feedback, type="asynchronous", method="chosen", startStates = list(start_state_00), genesOFF = c("BCL2","IAP"), returnTable=T)
 attractors_lock_01=getAttractors(intrinsic_feedback, type="asynchronous", method="chosen", startStates = list(start_state_01), genesON=c("IAP"), genesOFF = c("BCL2"), returnTable=T)
 attractors_lock_10=getAttractors(intrinsic_feedback, type="asynchronous", method="chosen", startStates = list(start_state_10), genesON=c("BCL2"), genesOFF = c("IAP"), returnTable=T)
 attractors_lock_11=getAttractors(intrinsic_feedback, type="asynchronous", method="chosen", startStates = list(start_state_11), genesON=c("BCL2", "IAP"), returnTable=T)
 
 # old:
+par(mfrow=c(2,2))
 plotAttractors(attractors_lock_00, drawLegend=F, title = "00")
 plotAttractors(attractors_lock_01, drawLegend=F, title = "01")
 plotAttractors(attractors_lock_10, drawLegend=F, title = "10")
 plotAttractors(attractors_lock_11, drawLegend=F, title = "11")
 
-# new, alternative
-source("plot_attractor_path.R")
-genes_to_plot = c("BCL2", "Apaf1", "IAP", "Apoptosis") # optional
-cols=c("green", "orange", "blue", "red") #optional
 
 # does not work to well with par(mfrow)
 plot_attractor_path(network=intrinsic_feedback, startStates = start_state_00, genes = genes_to_plot, colors = cols)
