@@ -1,12 +1,12 @@
 plot_attractor_path <- function(network, startStates, title="", genes="all", colors=c(), save_png=F){
-  "Function that plots a line graph of components in an attractor path of a syncronous simulation.
-   Inputs:
-    network: boolean Network
-    startStates: binary vector of start states for each gene
-    title: optional, title of the plot
-    genes: optional; either vector of gene names (strings) or indices. If not provided all are plotted.
-    colors: optional, vector of colors
-    save_png: optional Boolean; if TRUE then plots gets saved in current directory"
+   # Function that plots a line graph of components in an attractor path of a synchronous simulation.
+   # Inputs:
+   #  network: boolean Network
+   #  startStates: binary vector of start states for each gene
+   #  title: optional, title of the plot 
+   #  genes: optional; either vector of gene names (strings) or indices. If not provided all are plotted.
+   #  colors: optional, vector of colors
+   #  save_png: optional Boolean; if TRUE then plots gets saved in current directory
   library(BoolNet)
   attractor_info <- getAttractors(network = network, method = "chosen", startStates = list(startStates), 
                                   type="synchronous", returnTable = T)

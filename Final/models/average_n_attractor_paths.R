@@ -38,42 +38,47 @@ get_asynchronous_attractor <- function(network, start_state){
   
 }
 
-average_n_attractor_paths <- function(network, number_of_runs, start_state){
-  previous_state = start_state   # initialised with start state
-  names(previous_state) = network$genes
-  previous_path_len = NA
-  previous_path = NA
-  
-  transitions <- matrix(start_state, ncol=1)
-  
-  for (n in seq(1,number_of_runs)){
-      
-  
-  #   # att <- getAttractors(network=network, type="asynchronous", method="chosen", startStates=list(start_state), returnTable = T)
-  #   # path_to_attractor <- getPathToAttractor(network=att, state=start_state, includeAttractorStates = "all")
-  #   # path_len = length(path_to_attractor[,1])
-  #   next_state <- stateTransition(network = network, state = previous_state, type = "asynchronous")
-  #   print(previous_state)
-  #   print("####next:")
-  #   print(next_state)
-  #   i = 0 # dev variable
-  #   while (!identical(next_state, previous_state)){
-  #     print(i)
-  #     transitions <- cbind(transitions, next_state)
-  #     previous_state <- next_state
-  #     next_state <- stateTransition(network = network, state = previous_state, type = "asynchronous")
-  #     
-  #     print(previous_state)
-  #     print("####next:")
-  #     print(next_state)
-  #     
-  #     i = i+1
-  #     
-  #   }
-  #   # print(c("Attractor #:",n))
-  #   # print(transitions)
-      
+ensure_dimensions <- function(m1,m2){
+  cols_m1 = length(m1[1,])
+  cols_m2 = length(m2[1,])
+  rows_m1 = length(m1[,1])
+  rows_m2 = length(m2[,1])
+  if ( cols_m1 <  cols_m2){
+    difference <- cols_m2 - cols_m1
+    for (i in (seq(1, difference))){
+      # add columns only consisting of zeros
+      m1 <- cbind(m1, numeric(rows_m1))
+      cols_m1 = length(m1[1,])
+      print("Fixed matrix dimensions. Added column.")
+    }
   }
+  
+  if ( rows_m1 <  rows_m2){
+    difference <- rows_m2 - rows_m1
+    for (i in (seq(1, difference))){
+      m1 <- rbind(m1, numeric(cols_m1))
+      rows_m2 = length(m2[,1])
+      print("Fixed matrix dimensions. Added row")
+    }
+  }
+  return(m1)
+}
+
+average_n_attractor_paths <- function(network, number_of_runs, start_state){
+  previous_state = start_state 
+  names(start_state) = network$genes
+  
+  sum_holder <- get_asynchronous_attractor(network, start_state)
+  if (number_of_runs > 1){
+    for (n in seq(2,number_of_runs)){
+      
+      next_matrix <- get_asynchronous_attractor(network, start_state)
+      sum_holder <- ensure_dimensions(sum_holder, next_matrix)
+      sum_holder <- sum_holder + next_matrix
+        
+    }
+  }
+  return((sum_holder)/number_of_runs)
   
 }
 
@@ -83,17 +88,8 @@ library(BoolNet)
 setwd("~/System_Biology/Final/models")
 intrinsic_feedback <- loadNetwork("intrinsic_feedback.boolnet")
 start_state_in = c(1,0,1,0,0,0,0,0,0,1,0,0)
-average_n_attractor_paths(network = intrinsic_feedback, number_of_runs = 1, start_state = start_state_in)
-
+n_runs_matrix_5 <- average_n_attractor_paths(network = intrinsic_feedback, number_of_runs = 4000,
+                                           start_state = start_state_in)
+write.csv(n_runs_matrix, "4000_runs_intrinsic_feedback.csv")
 
 ## dev stuff
-next_step <- get_asynchronous_next_step(intrinsic_feedback, start_state_in)
-step_matrix <- get_asynchronous_attractor(intrinsic_feedback, start_state_in)
-# next_state <- stateTransition(network = intrinsic_feedback, state = start_state_in, type = "asynchronous")
-# transitions <- matrix(start_state_in, ncol=1)
-# length(transitions)
-# print(next_state)
-# cbind(transitions, next_state)
-# print(transitions)
-# View(transitions)
-
