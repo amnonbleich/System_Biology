@@ -28,10 +28,6 @@ plotSequence(intrinsic_feedback, startState = start_state_in, title = "Casp3->Ca
 start_state_in = c(1,0,1,0,0,0,0,0,0,1,0,0)
 att <- getAttractors(network=intrinsic_feedback, type="asynchronous", method="chosen", startStates=list(start_state_in))
 
-# intrinsic_feedback_prob <- loadNetwork("intrinsic_feedback_prob.boolnet")
-# source("average_n_attractor_paths.R")
-# average_n_attractor_paths(network = intrinsic_feedback, number_of_runs = 1000, start_state = start_state_in)
-
 ##Stimulus stops - no lock effect
 middle_start_state_in = c(0,1,0,1,1,1,1,1,1,0,1,1)
 par(mfrow=c(1,2))
@@ -42,13 +38,14 @@ plotSequence(intrinsic, startState = middle_start_state_in ,title = "no_feedback
 plotSequence(intrinsic_feedback, startState = middle_start_state_in, title = "Casp3->Casp9 feedback", drawLegend=F)
 
 # new, alternative:
-genes_to_plot = c("stimulus","BCL2", "IAP","Casp9", "Apoptosis") # optional
-cols=c("green", "orange", "blue", "red", "darkred") #optional
-par(mfrow=c(1,2))
+genes_to_plot = c("stimulus", "IAP","Casp9", "Apoptosis") # optional
+genes_to_plot = c("IAP","Apoptosis","BCL2") # optional
+cols=c("orange", "blue", "red") #optional
+# par(mfrow=c(1,2))
 source("plot_attractor_path.R")
 plot_attractor_path(intrinsic, title = "no_feedback", startStates = start_state_in, 
-                    second_round_states = middle_start_state_in, genes = genes_to_plot, colors = cols, save_png = T)
-plot_attractor_path(intrinsic_feedback, title = "Casp3->Casp9 feedback", startStates = start_state_in, 
+                    second_round_states = middle_start_state_in, genes = genes_to_plot, colors = cols, save_png = T, draw_legend = F)
+plot_attractor_path(intrinsic_feedback, title = "IAP - BCL2 relationship", startStates = start_state_in, 
                     second_round_states = middle_start_state_in, genes = genes_to_plot, colors = cols, draw_legend = F, save_png = T )
 
 attractors=getAttractors(intrinsic, type="asynchronous", method="chosen", startStates = list(middle_start_state_in), returnTable=T)
@@ -136,17 +133,31 @@ print(hamming$value)
 hamming <- perturbTrajectories(intrinsic_feedback, measure="hamming", numSamples=1000)
 print(hamming$value)
 
-robust_no_feedback = perturbTrajectories(intrinsic,
-                                         measure = c("hamming", "sensitivity", "attractor"),
-                                         numSamples = 1000,
-                                         flipBits = 1,
-                                         updateType = c("synchronous", "asynchronous", "probabilistic"))
+robust_no_feedback_att = perturbTrajectories(intrinsic,
+                                             measure = "attractor",
+                                             numSamples = 1000,
+                                             flipBits = 1)
 
-robust_feedback = perturbTrajectories(intrinsic_feedback,
-                                      measure = c("hamming", "sensitivity", "attractor"),
-                                      numSamples = 1000,
-                                      flipBits = 1,
-                                      updateType = c("synchronous", "asynchronous", "probabilistic"))
-## same robustness ~ 0.85
-print(robust_no_feedback$value)
-print(robust_feedback$value) # ~724
+robust_no_feedback_ham = perturbTrajectories(intrinsic,
+                                             measure = "hamming",
+                                             numSamples = 1000,
+                                             flipBits = 1,
+                                             updateType ="asynchronous")
+
+robust_feedback_att = perturbTrajectories(intrinsic_feedback,
+                                             measure = "attractor",
+                                             numSamples = 1000,
+                                             flipBits = 1)
+
+robust_feedback_ham = perturbTrajectories(intrinsic_feedback,
+                                             measure = "hamming",
+                                             numSamples = 1000,
+                                             flipBits = 1,
+                                             updateType ="asynchronous")
+
+
+## comparable robustness 
+print(robust_no_feedback_att$value)
+print(robust_no_feedback_ham$value)
+print(robust_feedback_att$value) # ~724
+print(robust_feedback_ham$value) # ~724
