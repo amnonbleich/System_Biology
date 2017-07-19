@@ -80,7 +80,5 @@ plot_attractor_path <- function(network, startStates, second_round_states = "" ,
 # start_state_in = c(1,0,1,0,0,0,0,0,0,1,0,0)
 # genes_to_plot = c("BCL2", "Apaf1", "IAP", "Apoptosis")
 # cols=c("green", "orange", "blue", "red")
-# 
-# 
 # plot_attractor_path(network=intrinsic_feedback,startStates=start_state_in, genes=genes_to_plot, title = "Intrinsic Apoptosis Pathway",
 #                     colors = cols, save_png = F)
